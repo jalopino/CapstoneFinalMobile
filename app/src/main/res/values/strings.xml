@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Ticketing App</string>
+    <string-array name="choices_array">
+        <item>Driving Without a Valid License</item>
+        <item>Not Wearing a Seat Belt</item>
+        <item>Reckless Driving</item>
+        <item>Driving Under the Influence of Alcohol and/or Prohibited Drugs</item>
+        <item>Not Wearing a Helmet </item>
+        <item>Obstruction</item>
+        <!-- Add more choices here -->
+    </string-array>
+</resources>
