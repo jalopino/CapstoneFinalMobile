@@ -30,16 +30,14 @@
 
     <TextView
         android:id="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@id/textView3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This app was designed and built by group 8 of BSIT 3A. \n WheelTix is an app made for BTAO and traffic enforcers, \n issuing traffic violations more easier."
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="440dp"
-        android:gravity="center"/>
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="This app was designed and built by students of BSIT 4A. \n E - Trafickets is an app made for BTAO and traffic enforcers, \n issuing traffic violations more easier."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView3" />
 
     <Button
         android:id="@+id/login"
@@ -50,21 +48,8 @@
         android:text="Login"
         app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/register"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView4" />
-
-    <Button
-        android:id="@+id/register"
-        android:layout_width="110dp"
-        android:layout_height="60dp"
-        android:backgroundTint="@color/black"
-        android:text="Register"
-        app:cornerRadius="30dp"
-        android:layout_marginTop="90dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/login"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView4" />
 
     <EditText

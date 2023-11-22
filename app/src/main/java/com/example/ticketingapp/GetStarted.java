@@ -19,8 +19,8 @@ import org.json.JSONObject;
 
 public class GetStarted extends AppCompatActivity {
     private static JSONParser jsonParser = new JSONParser();
-    private static String urlHostUser = "http://192.168.1.7/WheelTix/selectUser.php";
-    private static String urlHostPass = "http://192.168.1.7/WheelTix/selectPass.php";
+    private static String urlHostUser = "http://192.168.68.107/WheelTix/selectUser.php";
+    private static String urlHostPass = "http://192.168.68.107/WheelTix/selectPass.php";
     private static String username = "";
     private static String password = "";
     private static String TAG_MESSAGE = "message" , TAG_SUCCESS = "success";

@@ -29,8 +29,8 @@ import javax.net.ssl.SSLEngineResult;
 public class Register extends AppCompatActivity {
     private static JSONParser jParser = new JSONParser();
     private static JSONParser jsonParser = new JSONParser();
-    private static String urlHost = "http://192.168.1.7/WheelTix/register.php";
-    private static String urlHostUser = "http://192.168.1.7/WheelTix/selectUser.php";
+    private static String urlHost = "http://192.168.68.107/WheelTix/register.php";
+    private static String urlHostUser = "http://192.168.68.107/WheelTix/selectUser.php";
     private static String TAG_MESSAGE = "message" , TAG_SUCCESS = "success";
     private static String online_dataset = "";
     private static String email = "";

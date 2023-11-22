@@ -21,11 +21,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Calendar;
+import android.app.DatePickerDialog;
+import android.widget.DatePicker;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 
 public class IssueViolation extends AppCompatActivity {
     private static JSONParser jParser = new JSONParser();
-    private static String urlHostIssue = "http://192.168.1.7/WheelTix/issueViolation.php";
+    private static String urlHostIssue = "http://192.168.68.107/WheelTix/issueViolation.php";
     private static String TAG_MESSAGE = "message" , TAG_SUCCESS = "success";
     private static String online_dataset = "";
     private static String drivername = "";
@@ -33,9 +37,10 @@ public class IssueViolation extends AppCompatActivity {
     private static String licensenum = "";
     private static String tov = "";
     private static String date = "";
-    private static EditText driverInput, dobInput, licenseInput;
+    private static EditText driverInput, licenseInput;
     private static Spinner tovInput;
-    private static TextView dateToday;
+    private static TextView dateToday, dobInput;
+    private Button dateButton;
     Button submit, cancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +110,38 @@ public class IssueViolation extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        dateButton = findViewById(R.id.dateButton);
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
+    }
+    private void showDatePickerDialog() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(IssueViolation.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        // Create a Calendar instance with the selected date
+                        Calendar selectedCalendar = Calendar.getInstance();
+                        selectedCalendar.set(Calendar.YEAR, year);
+                        selectedCalendar.set(Calendar.MONTH, monthOfYear);
+                        selectedCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                        // Format the selected date as a string
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                        String selectedDate = dateFormat.format(selectedCalendar.getTime());
+                        // Use the selectedDate string as needed
+                        dobInput.setText(selectedDate);
+                    }
+                }, year, month, day);
+        datePickerDialog.show();
     }
     private class uploadDatatoURL extends AsyncTask<String, String, String> {
         String cPOST = "", cPostSQL = "", cMessage = "Querying data...";

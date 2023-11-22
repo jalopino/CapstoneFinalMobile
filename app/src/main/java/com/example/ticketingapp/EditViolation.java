@@ -21,14 +21,21 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
+import android.app.DatePickerDialog;
+import android.widget.DatePicker;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+
 public class EditViolation extends AppCompatActivity {
     private Spinner tov;
     private static Button btnQuery, cancel;
-    private static EditText fn, dob, ln;
-    private static TextView tv_civ, defburger;
+    private static EditText fn, ln;
+    private static TextView tv_civ, defburger, dob;
     private static String cItemcode = "";
     private static JSONParser jParser = new JSONParser();
-    private static String urlHost = "http://192.168.1.7/WheelTix/UpdateViolation.php";
+    private static String urlHost = "http://192.168.68.107/WheelTix/UpdateViolation.php";
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
     public static String String_isempty = "";
@@ -40,13 +47,22 @@ public class EditViolation extends AppCompatActivity {
     public static String FullName = "";
     public static String Dateofbirth = "";
     public static String Licensenumber = "";
+    private Button dateButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_violation);
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        );
         fn = (EditText) findViewById(R.id.drivername);
-        dob = (EditText) findViewById(R.id.dob);
+        dob = (TextView) findViewById(R.id.dob);
         ln = (EditText) findViewById(R.id.licensenum);
         tov = (Spinner) findViewById(R.id.tov);
         cancel = (Button) findViewById(R.id.cancel);
@@ -82,6 +98,13 @@ public class EditViolation extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        dateButton = findViewById(R.id.dateButton);
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
         tov.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -96,7 +119,31 @@ public class EditViolation extends AppCompatActivity {
             }
         });
     }
+    private void showDatePickerDialog() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
+        DatePickerDialog datePickerDialog = new DatePickerDialog(EditViolation.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        // Create a Calendar instance with the selected date
+                        Calendar selectedCalendar = Calendar.getInstance();
+                        selectedCalendar.set(Calendar.YEAR, year);
+                        selectedCalendar.set(Calendar.MONTH, monthOfYear);
+                        selectedCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                        // Format the selected date as a string
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                        String selectedDate = dateFormat.format(selectedCalendar.getTime());
+                        // Use the selectedDate string as needed
+                        dob.setText(selectedDate);
+                    }
+                }, year, month, day);
+        datePickerDialog.show();
+    }
     private class uploadDataToURL extends AsyncTask<String, String, String> {
         String cPOST = "", cPostSQL = "", cMessage = "Querying data...";
         String gens, civil;

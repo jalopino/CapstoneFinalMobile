@@ -32,11 +32,11 @@ public class ManageViolation extends AppCompatActivity {
     TextView textView, txtDefault, txtDefault_DOB, txtDefault_LN, txtDefault_TOV, txtDefault_ID;
     private static EditText edtitemcode;
     private static JSONParser jsonParser = new JSONParser();
-    private static String urlHostID = "http://192.168.1.7/WheelTix/selectViolationID.php";
-    private static String urlHostFN = "http://192.168.1.7/WheelTix/selectViolationFN.php";
-    private static String urlHostDOB = "http://192.168.1.7/WheelTix/selectViolationDOB.php";
-    private static String urlHostLN = "http://192.168.1.7/WheelTix/selectViolationLicense.php";
-    private static String urlHostTOV = "http://192.168.1.7/WheelTix/selectViolationTOV.php";
+    private static String urlHostID = "http://192.168.68.107/WheelTix/selectViolationID.php";
+    private static String urlHostFN = "http://192.168.68.107/WheelTix/selectViolationFN.php";
+    private static String urlHostDOB = "http://192.168.68.107/WheelTix/selectViolationDOB.php";
+    private static String urlHostLN = "http://192.168.68.107/WheelTix/selectViolationLicense.php";
+    private static String urlHostTOV = "http://192.168.68.107/WheelTix/selectViolationTOV.php";
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
     private static String cItemcode = "";

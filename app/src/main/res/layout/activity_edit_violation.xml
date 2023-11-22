@@ -46,14 +46,21 @@
             android:inputType="textPersonName"
             android:hint="Driver's Name" />
 
-        <EditText
+        <TextView
             android:id="@+id/dob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:textSize="18sp"
             android:inputType="textPersonName"
             android:hint="Date of Birth" />
 
+        <Button
+            android:id="@+id/dateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
+            android:text="Choose Date" />
         <EditText
             android:id="@+id/licensenum"
             android:layout_width="match_parent"
@@ -61,6 +68,11 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="License Number" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Type of Violation: " />
 
         <Spinner
             android:id="@+id/tov"
