@@ -1,32 +1,26 @@
 package com.example.ticketingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-//Add encryption protection on registration and login
-
 public class GetStarted extends AppCompatActivity {
     private static JSONParser jsonParser = new JSONParser();
-    private static String urlHostUser = "http://192.168.68.107/WheelTix/selectUser.php";
-    private static String urlHostPass = "http://192.168.68.107/WheelTix/selectPass.php";
-    private static String username = "";
-    private static String password = "";
-    private static String TAG_MESSAGE = "message" , TAG_SUCCESS = "success";
-    private static String online_dataset = "";
-    private static EditText userInput, passInput;
-    Button register, login;
+    private static String urlHost = "https://bc8b-49-145-165-141.ngrok-free.app/Capstone/mobileofficer/login.php";
+    private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
+    private EditText userInput, passInput;
+    Button login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,57 +35,36 @@ public class GetStarted extends AppCompatActivity {
         setContentView(R.layout.activity_getstarted);
         userInput = findViewById(R.id.username);
         passInput = findViewById(R.id.password);
-        register = findViewById(R.id.register);
         login = findViewById(R.id.login);
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(GetStarted.this, Register.class);
-                startActivity(intent);
-            }
-        });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                username = userInput.getText().toString();
-                password = passInput.getText().toString();
-                new checkUser().execute();
+                String username = userInput.getText().toString();
+                String password = passInput.getText().toString();
+                new VerifyLogin().execute(username, password);
             }
         });
     }
-    private class checkUser extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = " ", cMessage = "Logging In...";
-        int nPostValueIndex;
-        ProgressDialog pDialog = new ProgressDialog(GetStarted.this);
 
-        public checkUser() {
-        }
+    private class VerifyLogin extends AsyncTask<String, String, String> {
+        ProgressDialog pDialog = new ProgressDialog(GetStarted.this);
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.setMessage(cMessage);
+            pDialog.setMessage("Logging In...");
             pDialog.show();
         }
 
         @Override
         protected String doInBackground(String... params) {
-            int nSuccess;
             try {
                 ContentValues cv = new ContentValues();
-                cPostSQL = username;
-                cv.put("code", cPostSQL);
-                JSONObject json = jsonParser.makeHTTPRequest(urlHostUser, "POST", cv);
+                cv.put("username", params[0]);
+                cv.put("password", params[1]);
+                JSONObject json = jsonParser.makeHTTPRequest(urlHost, "POST", cv);
                 if (json != null) {
-                    nSuccess = json.getInt(TAG_SUCCESS);
-                    if (nSuccess == 1) {
-                        online_dataset = json.getString(TAG_MESSAGE);
-                        return online_dataset;
-                    } else {
-                        return json.getString(TAG_MESSAGE);
-                    }
+                    return json.getString(TAG_MESSAGE);
                 } else {
                     return "HTTPSERVER_ERROR";
                 }
@@ -103,80 +76,11 @@ public class GetStarted extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            super.onPostExecute(s);
             pDialog.dismiss();
-            String isEmpty = "";
-            android.app.AlertDialog.Builder alert = new AlertDialog.Builder(GetStarted.this);
-            if (s != null) {
-                if (isEmpty.equals("") && !s.equals("HTTPSERVER_ERROR")) { }
-                String wew = s;
-                String str = wew;
-                final String fnames[] = str.split("-");
-                if (fnames[0].equals(username)) {
-                    new checkPass().execute();
-                } else {
-                    alert.setMessage("Invalid Username or Password");
-                    alert.setTitle("Error");
-                    alert.show();
-                }
-            } else {
-                alert.setMessage("Query Interrupted... \nPlease Check Internet Connection");
-                alert.setTitle("Error");
-                alert.show();
-            }
-        }
-    }
-
-    private class checkPass extends AsyncTask<String, String, String> {
-        String cPOST = "", cPostSQL = " ", cMessage = "Querying data...";
-        int nPostValueIndex;
-        ProgressDialog pDialog = new ProgressDialog(GetStarted.this);
-
-        public checkPass() {
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            int nSuccess;
-            try {
-                ContentValues cv = new ContentValues();
-                cPostSQL = password;
-                cv.put("code", cPostSQL);
-                JSONObject json = jsonParser.makeHTTPRequest(urlHostPass, "POST", cv);
-                if (json != null) {
-                    nSuccess = json.getInt(TAG_SUCCESS);
-                    if (nSuccess == 1) {
-                        online_dataset = json.getString(TAG_MESSAGE);
-                        return online_dataset;
-                    } else {
-                        return json.getString(TAG_MESSAGE);
-                    }
-                } else {
-                    return "HTTPSERVER_ERROR";
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            pDialog.dismiss();
-            String isEmpty = "";
-            android.app.AlertDialog.Builder alert = new AlertDialog.Builder(GetStarted.this);
-            if (s != null) {
-                if (isEmpty.equals("") && !s.equals("HTTPSERVER_ERROR")) { }
-                String wew = s;
-                String str = wew;
-                final String fnames[] = str.split("-");
-                if (fnames[0].equals(password)) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(GetStarted.this);
+            if (s != null && !s.equals("HTTPSERVER_ERROR")) {
+                if (s.equals("success")) {
+                    saveUsername(userInput.getText().toString());
                     Intent intent = new Intent(GetStarted.this, MainActivity.class);
                     startActivity(intent);
                 } else {
@@ -190,5 +94,12 @@ public class GetStarted extends AppCompatActivity {
                 alert.show();
             }
         }
+    }
+
+    private void saveUsername(String username) {
+        SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Username", username);
+        editor.apply();
     }
 }

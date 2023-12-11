@@ -38,6 +38,20 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:textAllCaps="true" />
 
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:textStyle="normal"
+            android:layout_height="wrap_content"
+            android:text="Issued by:" />
+
+        <TextView
+            android:id="@+id/officer"
+            android:layout_width="wrap_content"
+            android:textStyle="normal"
+            android:layout_height="wrap_content"
+            android:text="Officer Name" />
+
         <EditText
             android:id="@+id/drivername"
             android:layout_width="wrap_content"
@@ -46,21 +60,13 @@
             android:inputType="textPersonName"
             android:hint="Driver's Name" />
 
-        <TextView
-            android:id="@+id/dob"
+        <EditText
+            android:id="@+id/driverphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:textSize="18sp"
             android:inputType="textPersonName"
-            android:hint="Date of Birth" />
-
-        <Button
-            android:id="@+id/dateButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
-            android:text="Choose Date" />
+            android:hint="Driver's Phone Number" />
 
         <EditText
             android:id="@+id/licensenum"

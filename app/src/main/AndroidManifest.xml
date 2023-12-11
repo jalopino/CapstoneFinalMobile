@@ -27,9 +27,6 @@
             android:name=".IssueViolation"
             android:exported="false" />
         <activity
-            android:name=".Register"
-            android:exported="false" />
-        <activity
             android:name=".GetStarted"
             android:exported="false" />
         <activity

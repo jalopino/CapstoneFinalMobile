@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textViewViolationDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Violation Detail"
+        android:textSize="16sp"
+        android:background="@drawable/border_background"/>
+
+    <!-- Add more TextViews or other Views here for each detail you want to display -->
+
+</LinearLayout>

@@ -1,12 +1,31 @@
 <resources>
     <string name="app_name">Ticketing App</string>
     <string-array name="choices_array">
-        <item>Driving Without a Valid License</item>
-        <item>Not Wearing a Seat Belt</item>
+        <item>Disregarding Traffic Signs</item>
+        <item>Illegal Parking (Attended)</item>
+        <item>Illegal Parking (Unattended)</item>
+        <item>Unified Vehicle Reduction Program</item>
+        <item>Truck Ban</item>
+        <item>Truck Ban (Light)</item>
         <item>Reckless Driving</item>
-        <item>Driving Under the Influence of Alcohol and/or Prohibited Drugs</item>
-        <item>Not Wearing a Helmet </item>
+        <item>Tricycle Ban</item>
         <item>Obstruction</item>
+        <item>Dress Code for Motorcycle Riders</item>
+        <item>Overloading</item>
+        <item>Defective Motor Vehicles Accessories</item>
+        <item>Unauthorized Modification</item>
+        <item>Arrogance/ Discourteous Conduct</item>
+        <item>Loading/Unloading in Prohibited Zone</item>
+        <item>Illegal Counter flow</item>
+        <item>Over Speeding</item>
+        <item>Failure to use Seatbelt</item>
+        <item>Failure to use Child Restraint System</item>
+        <item>Use of Substandard Child Restraint System</item>
+        <item>No Motorcycle Helmet</item>
+        <item>Use of Helmet with no ICC Sticker/Mark</item>
+        <item>Violation of Children Safety in Motorcycle Act</item>
+        <item>Anti-Distracted Driving Act (Private)</item>
+        <item>Anti-Distracted Driving Act (PUV/PUJ)</item>
         <!-- Add more choices here -->
     </string-array>
 </resources>
