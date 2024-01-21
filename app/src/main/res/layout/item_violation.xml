@@ -6,13 +6,32 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/textViewViolationDetail"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Violation Detail"
-        android:textSize="16sp"
-        android:background="@drawable/border_background"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/black"
+        android:text="Violation"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-    <!-- Add more TextViews or other Views here for each detail you want to display -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewViolationDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_background"
+            android:text="Violation Detail"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="20sp" />
+    </LinearLayout>
+
 
 </LinearLayout>

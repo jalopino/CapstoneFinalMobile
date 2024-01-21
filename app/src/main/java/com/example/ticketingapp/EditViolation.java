@@ -35,7 +35,7 @@ public class EditViolation extends AppCompatActivity {
     private static TextView tv_civ, defburger, dob;
     private static String cItemcode = "";
     private static JSONParser jParser = new JSONParser();
-    private static String urlHost = "http://192.168.68.107/WheelTix/UpdateViolation.php";
+    private static String urlHost = "https://6f51-2001-4454-5ac-5100-346d-f6e7-e0bc-78b9.ngrok-free.app/WheelTix/UpdateViolation.php";
     private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
     private static String online_dataset = "";
     public static String String_isempty = "";

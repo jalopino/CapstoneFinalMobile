@@ -44,7 +44,7 @@ public class ManageViolation extends AppCompatActivity {
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("code", officerUsername); // Add the officer's username here
 
-                JSONObject jsonObject = jsonParser.makeHTTPRequest("https://bc8b-49-145-165-141.ngrok-free.app/Capstone/mobileofficer/selectViolationID.php", "POST", contentValues);
+                JSONObject jsonObject = jsonParser.makeHTTPRequest("https://843a-49-145-171-0.ngrok-free.app/Capstone/mobileofficer/selectViolationID.php", "POST", contentValues);
                 List<Violation> violationsList = new ArrayList<>();
 
                 try {

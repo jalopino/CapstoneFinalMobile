@@ -1,13 +1,15 @@
 package com.example.ticketingapp;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
+import java.time.LocalTime;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,15 +24,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Calendar;
+import java.time.format.DateTimeFormatter;
 import android.app.DatePickerDialog;
 import android.widget.DatePicker;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class IssueViolation extends AppCompatActivity {
     private static JSONParser jParser = new JSONParser();
-    private static String urlHostIssue = "https://bc8b-49-145-165-141.ngrok-free.app/Capstone/mobileofficer/issueViolation.php";
+    private static String urlHostIssue = "https://843a-49-145-171-0.ngrok-free.app/Capstone/mobileofficer/issueViolation.php";
     private static String TAG_MESSAGE = "message" , TAG_SUCCESS = "success";
     private static String online_dataset = "";
     private static String drivername = "";
@@ -39,11 +43,14 @@ public class IssueViolation extends AppCompatActivity {
     private static String phone = "";
     private static String tov = "";
     private static String date = "";
-    private static EditText driverInput, licenseInput, driverPhone;
+    private static String place = "";
+    private static String time = "";
+    private static EditText driverInput, licenseInput, driverPhone, placeInput;
     private static Spinner tovInput;
-    private static TextView dateToday, officerName;
+    private static TextView dateToday, officerName, timeToday;
     Button submit, cancel;
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().getDecorView().setSystemUiVisibility(
@@ -60,9 +67,11 @@ public class IssueViolation extends AppCompatActivity {
         driverPhone = findViewById(R.id.driverphone);
         driverInput = findViewById(R.id.drivername);
         licenseInput = findViewById(R.id.licensenum);
+        placeInput = findViewById(R.id.place);
         submit = findViewById(R.id.submit);
         cancel = findViewById(R.id.cancel);
         dateToday = findViewById(R.id.date);
+        timeToday = findViewById(R.id.time);
         String username = getUsername();
         if (username != null) {
             officerName.setText(username);
@@ -72,7 +81,10 @@ public class IssueViolation extends AppCompatActivity {
         int month = calendar.get(Calendar.MONTH) + 1; // Month starts from 0
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         String currentDate = String.format("%d-%02d-%02d", year, month, day);
+        LocalTime currentTime = LocalTime.now();
+        String formattedTime = formatLocalTime(currentTime);
         dateToday.setText(currentDate);
+        timeToday.setText(formattedTime);
 
         // Create an ArrayAdapter using a string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -93,7 +105,9 @@ public class IssueViolation extends AppCompatActivity {
                 phone = driverPhone.getText().toString();
                 drivername = driverInput.getText().toString();
                 licensenum = licenseInput.getText().toString();
+                place = placeInput.getText().toString();
                 date = dateToday.getText().toString();
+                time = timeToday.getText().toString();
                 new uploadDatatoURL().execute();
             }
         });
@@ -144,6 +158,8 @@ public class IssueViolation extends AppCompatActivity {
                 cv.put("tov", tov);
                 cv.put("date", date);
                 cv.put("phone", phone);
+                cv.put("time", time);
+                cv.put("place", place);
 
                 JSONObject json = jParser.makeHTTPRequest(urlHostIssue, "POST", cv);
                 if(json != null) {
@@ -181,5 +197,11 @@ public class IssueViolation extends AppCompatActivity {
     private String getUsername() {
         SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
         return sharedPreferences.getString("Username", null); // Return null or a default value if not found
+    }
+    private static String formatLocalTime(LocalTime localTime) {
+        return localTime.format(getFormatter());
+    }
+    private static DateTimeFormatter getFormatter() {
+        return DateTimeFormatter.ofPattern("HH:mm:ss");
     }
 }

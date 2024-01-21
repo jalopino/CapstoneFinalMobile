@@ -75,6 +75,13 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="License Number" />
+        <EditText
+            android:id="@+id/place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Place of incident" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,6 +102,12 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:text="Date: " />
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="Time: " />
 
     </LinearLayout>
 
@@ -103,8 +116,8 @@
         android:layout_width="110dp"
         android:layout_height="60dp"
         android:backgroundTint="@color/black"
+        android:text="ISSUE"
         app:cornerRadius="30dp"
-        android:text="submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/cancel"
         app:layout_constraintStart_toStartOf="parent"

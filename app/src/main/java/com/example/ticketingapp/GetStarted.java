@@ -16,8 +16,8 @@ import org.json.JSONObject;
 
 public class GetStarted extends AppCompatActivity {
     private static JSONParser jsonParser = new JSONParser();
-    private static String urlHost = "https://bc8b-49-145-165-141.ngrok-free.app/Capstone/mobileofficer/login.php";
-    private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success";
+    private static String urlHost = "https://843a-49-145-171-0.ngrok-free.app/Capstone/mobileofficer/login.php";
+    private static String TAG_MESSAGE = "message", TAG_SUCCESS = "success", TAG_STATUS = "status", TAG_ASSIGNMENT = "assignment";
     private EditText userInput, passInput;
     Button login;
 
@@ -64,6 +64,10 @@ public class GetStarted extends AppCompatActivity {
                 cv.put("password", params[1]);
                 JSONObject json = jsonParser.makeHTTPRequest(urlHost, "POST", cv);
                 if (json != null) {
+                    String status = json.getString(TAG_STATUS);
+                    String assignment = json.getString(TAG_ASSIGNMENT);
+                    saveAssignment(assignment);
+                    saveStatus(status);
                     return json.getString(TAG_MESSAGE);
                 } else {
                     return "HTTPSERVER_ERROR";
@@ -100,6 +104,18 @@ public class GetStarted extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("Username", username);
+        editor.apply();
+    }
+    private void saveStatus(String status) {
+        SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Status", status);
+        editor.apply();
+    }
+    private void saveAssignment(String assignment) {
+        SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Assignment", assignment);
         editor.apply();
     }
 }

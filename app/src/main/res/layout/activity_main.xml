@@ -9,11 +9,11 @@
     <Button
         android:id="@+id/issue"
         android:layout_width="180dp"
-        android:layout_height="80dp"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/black"
         android:text="Issue a violation"
-        android:textSize="16sp"
+        android:textSize="9sp"
         app:cornerRadius="30dp"
         app:layout_constraintEnd_toEndOf="@id/issueIcon"
         app:layout_constraintStart_toStartOf="@id/issueIcon"
@@ -22,15 +22,42 @@
     <Button
         android:id="@+id/edit"
         android:layout_width="180dp"
-        android:layout_height="80dp"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/black"
         android:text="Violations Submitted"
-        android:textSize="16sp"
+        android:textSize="9sp"
         app:cornerRadius="30dp"
         app:layout_constraintEnd_toEndOf="@id/manageIcon"
         app:layout_constraintStart_toStartOf="@id/manageIcon"
         app:layout_constraintTop_toBottomOf="@id/manageIcon" />
+
+    <Button
+        android:id="@+id/timein"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/black"
+        android:text="Time-in"
+        android:textSize="12sp"
+        app:cornerRadius="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit" />
+
+    <Button
+        android:id="@+id/timeout"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/black"
+        android:text="Time-out"
+        android:textSize="12sp"
+        app:cornerRadius="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit" />
+
 
     <LinearLayout
         android:id="@+id/header"
@@ -57,10 +84,10 @@
     </LinearLayout>
 
     <ImageView
-        android:layout_marginTop="50dp"
         android:id="@+id/issueIcon"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/layout_bg"
         android:padding="10dp"
         android:scaleType="fitCenter"
@@ -72,8 +99,8 @@
     <ImageView
         android:layout_marginTop="25dp"
         android:id="@+id/manageIcon"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:background="@drawable/layout_bg"
         android:padding="10dp"
         android:scaleType="fitCenter"
@@ -81,4 +108,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/issue"
         app:srcCompat="@drawable/manageviolation" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="Status"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/assignment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/issueIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Assigned at:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/issueIcon"
+        app:layout_constraintEnd_toStartOf="@+id/assignment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        app:textAllCaps="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>
